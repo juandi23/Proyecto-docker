@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./ProyectoDocker/Backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./ProyectoDocker/Backend:/app  # Sincronizar el código local con el contenedor
+    command: gunicorn --bind 0.0.0.0:5000 app:app
+  frontend:
+    build:
+      context: ./ProyectoDocker/Frontend
+    ports:
+      - "3000:3000"
